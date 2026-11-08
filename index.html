@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel & Brush - Responsive UI Component Showcase</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 2rem; }
+        header { text-align: center; margin-bottom: 2.5rem; }
+        header h1 { font-size: 2.25rem; color: var(--text); margin-bottom: 0.5rem; }
+        header p { color: var(--text-muted); font-size: 1.1rem; }
+        .filter-nav { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 0.5rem 1.25rem; border-radius: 20px; cursor: pointer; font-weight: 500; transition: all 0.2s ease; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .card-preview { height: 180px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold; }
+        .card-body { padding: 1.25rem; }
+        .card-tag { display: inline-block; background: #e0e7ff; color: var(--primary); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.5rem; border-radius: 4px; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .card-title { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .card-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.4; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pixel & Brush UI Kit</h1>
+        <p>Responsive UI component showcase and vector asset gallery</p>
+    </header>
+    <div class="filter-nav">
+        <button class="filter-btn active" data-filter="all">All Assets</button>
+        <button class="filter-btn" data-filter="components">Components</button>
+        <button class="filter-btn" data-filter="vectors">Vectors</button>
+        <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+    </div>
+    <main class="gallery-grid" id="gallery">
+        <div class="card" data-category="components">
+            <div class="card-preview" style="background: linear-gradient(135deg, #4f46e5, #06b6d4)">UI</div>
+            <div class="card-body">
+                <span class="card-tag">Components</span>
+                <h3 class="card-title">Responsive Navigation Bar</h3>
+                <p class="card-desc">Accessible mobile-first navigation menu with smooth toggle transition.</p>
+            </div>
+        </div>
+        <div class="card" data-category="ecommerce">
+            <div class="card-preview" style="background: linear-gradient(135deg, #f59e0b, #ef4444)">SHOP</div>
+            <div class="card-body">
+                <span class="card-tag">E-Commerce</span>
+                <h3 class="card-title">Interactive Product Card</h3>
+                <p class="card-desc">Dynamic product card featuring image carousel, hover zoom, and quick add-to-cart action.</p>
+            </div>
+        </div>
+        <div class="card" data-category="vectors">
+            <div class="card-preview" style="background: linear-gradient(135deg, #10b981, #3b82f6)">SVG</div>
+            <div class="card-body">
+                <span class="card-tag">Vectors</span>
+                <h3 class="card-title">Minimal Icon Set</h3>
+                <p class="card-desc">Clean SVG icon collection tailored for modern e-commerce user interfaces.</p>
+            </div>
+        </div>
+        <div class="card" data-category="components">
+            <div class="card-preview" style="background: linear-gradient(135deg, #8b5cf6, #ec4899)">MODAL</div>
+            <div class="card-body">
+                <span class="card-tag">Components</span>
+                <h3 class="card-title">Modal Dialog Overlay</h3>
+                <p class="card-desc">Lightweight modal component with backdrop blur and keyboard accessibility.</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
